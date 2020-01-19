@@ -20,11 +20,6 @@ namespace WebTestApp.DAL.Infrastructure
 
         public IQueryable<T> Set { get { return _entities; } }
 
-        public T GetById(object id)
-        {
-            return this._entities.Find(id);
-        }
-
         public T Insert(T entity)
         {
             if (entity == null)
@@ -32,17 +27,6 @@ namespace WebTestApp.DAL.Infrastructure
                 throw new ArgumentNullException(nameof(entity));
             }
             _entities.Add(entity);
-            _dbContext.SaveChanges();
-            return entity;
-        }
-
-        public T Update(T entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-            _entities.Update(entity);
             _dbContext.SaveChanges();
             return entity;
         }
@@ -55,17 +39,6 @@ namespace WebTestApp.DAL.Infrastructure
             }
             _entities.Remove(entity);
             _dbContext.SaveChanges();
-        }
-
-        public void DeleteById(int id)
-        {
-            T entity = this._entities.Find(id);
-
-            if (entity != null)
-            {
-                _entities.Remove(entity);
-                _dbContext.SaveChanges();
-            }
         }
 
         public IQueryable<T> Include(params Expression<Func<T, object>>[] include)
