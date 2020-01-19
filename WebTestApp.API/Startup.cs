@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebTestApp.DAL.Infrastructure;
+using WebTestApp.Services.MappingConfigurations;
 using WebTestApp.Services.Transactions;
 
 namespace WebTestApp.API
@@ -42,6 +44,7 @@ namespace WebTestApp.API
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
+            services.AddAutoMapper(typeof(ServicesMappingConfig));
             
         }
 
