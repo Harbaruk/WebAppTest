@@ -11,10 +11,14 @@ namespace WebTestApp.Services.MappingConfigurations
     {
         public ServicesMappingConfig()
         {
-            CreateMap<TransactionEntity, TransactionModel>()
+            CreateMap<TransactionEntity, TransactionViewModel>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id))
                 .ForMember(x => x.Payment, opt => opt.MapFrom(y => $"{y.Amount} {y.CurrencyCode}"))
                 .ForMember(x => x.Status, opt => opt.ConvertUsing(new TransactionStatusConverter()));
+
+            CreateMap<TransactionModel, TransactionEntity>()
+               .ForMember(x => x.CurrencyCode, opt => opt.MapFrom(x => x.Currency))
+               .ForMember(x => x.TransactionDate, opt => opt.MapFrom(x => x.Date));
         }
     }
 
@@ -32,7 +36,7 @@ namespace WebTestApp.Services.MappingConfigurations
 
         public string Convert(string sourceMember, ResolutionContext context)
         {
-            return _dictionary.ContainsKey(sourceMember) ? _dictionary[sourceMember] : null;
+            return _dictionary.ContainsKey(sourceMember) ? _dictionary[sourceMember.Trim()] : null;
         }
     }
 }

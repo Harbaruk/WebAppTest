@@ -10,8 +10,8 @@ namespace WebTestApp.Services.Transactions
     {
 
         bool SaveFile(IFormFile file);
-        IList<TransactionModel> GetByCurrency(string currency);
-        IList<TransactionModel> GetByDateRange(DateTime from, DateTime to);
-        IList<TransactionModel> GetByStatus(string status);
+        IList<TransactionViewModel> GetByCurrency(string currency);
+        IList<TransactionViewModel> GetByDateRange(DateTime from, DateTime to);
+        IList<TransactionViewModel> GetByStatus(string status);
     }
 }

@@ -30,7 +30,13 @@ namespace WebTestApp.Services.FileReaders
 
             using (TextReader streamReader = new StreamReader(fileStream))
             {
-                using (var csvReader = new CsvReader(streamReader))
+                var config = new Configuration
+                {
+                    HeaderValidated = null,
+                    HasHeaderRecord = false,
+                    Delimiter = ","
+                };
+                using (var csvReader = new CsvReader(streamReader, config)) 
                 {
                     int counter = 1;
                     while (csvReader.Read())

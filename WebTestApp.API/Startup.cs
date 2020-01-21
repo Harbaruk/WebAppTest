@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebTestApp.DAL.Infrastructure;
+using WebTestApp.Services.FileReaders;
 using WebTestApp.Services.MappingConfigurations;
 using WebTestApp.Services.Transactions;
 
@@ -34,15 +35,17 @@ namespace WebTestApp.API
             services.AddMvc();
             services.AddDbContext<AppDbContext>(o =>
             {
-                string connStr = Configuration.GetConnectionString(_hostingEnvironment.EnvironmentName);
-                if (String.IsNullOrWhiteSpace(connStr))
-                {
-                    throw new Exception($"No connection string defined for {_hostingEnvironment.EnvironmentName}");
-                }
-                o.UseSqlServer(connStr);
+                o.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AppTest;Trusted_Connection=True;MultipleActiveResultSets=true");
             }, ServiceLifetime.Scoped);
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IFileProcessorFactory, FileProcessorFactory>();
+            services.AddTransient<ITransactionService, TransactionService>();
+
+            services.AddLogging(config =>
+            {
+                config.AddConsole();
+            });
 
             services.AddAutoMapper(typeof(ServicesMappingConfig));
             
@@ -57,6 +60,7 @@ namespace WebTestApp.API
             }
 
             app.UseMvc();
+            
         }
     }
 }

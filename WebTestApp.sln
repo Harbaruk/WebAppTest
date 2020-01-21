@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestApp.API", "WebTestApp.API\WebTestApp.API.csproj", "{3FA6F38D-0D6D-4ABD-A2CC-7C5D73FE879D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebTestApp.API", "WebTestApp.API\WebTestApp.API.csproj", "{3FA6F38D-0D6D-4ABD-A2CC-7C5D73FE879D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestApp.Services", "WebTestApp.Services\WebTestApp.Services.csproj", "{10F0698C-9165-46B4-B16F-2EAD1BBBB7B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebTestApp.Services", "WebTestApp.Services\WebTestApp.Services.csproj", "{10F0698C-9165-46B4-B16F-2EAD1BBBB7B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestApp.DAL", "WebTestApp.DAL\WebTestApp.DAL.csproj", "{351A77B1-D75A-43E0-94C3-4BA42FE5C691}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebTestApp.DAL", "WebTestApp.DAL\WebTestApp.DAL.csproj", "{351A77B1-D75A-43E0-94C3-4BA42FE5C691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebTestApp.API.Validations.Attributes;
+using WebTestApp.Services.FileProcessors.Models;
 using WebTestApp.Services.Transactions;
+using WebTestApp.Services.Transactions.Models;
 
 namespace WebTestApp.API.Controllers
 {
@@ -23,12 +25,36 @@ namespace WebTestApp.API.Controllers
         [HttpPost("upload")]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [ProducesResponseType(typeof(string), 404)]
-        [MaxFileSize(1 * 1024 * 1024)] // 1 Mb
-        [SupportedFormats(".csv", ".xml")]
-        public IActionResult UploadFile([FromForm] IFormFile file)
+       
+        public IActionResult UploadFile([FromForm] FileUploadModel file)
         {
-            _service.SaveFile(file);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _service.SaveFile(file.file);
             return Ok();
+        }
+
+        [HttpGet("byDateRange")]
+        [ProducesResponseType(typeof(IList<TransactionModel>),200)]
+        public IActionResult GetByDateRange([FromQuery] DateTime from, [FromQuery] DateTime to)
+        {
+            return Ok(_service.GetByDateRange(from, to));
+        }
+
+        [HttpGet("byStatus")]
+        [ProducesResponseType(typeof(IList<TransactionModel>), 200)]
+        public IActionResult GetByDateRange([FromQuery] string status)
+        {
+            return Ok(_service.GetByStatus(status));
+        }
+
+        [HttpGet("byCurrency")]
+        [ProducesResponseType(typeof(IList<TransactionModel>), 200)]
+        public IActionResult GetByCurrency([FromQuery] string code)
+        {
+            return Ok(_service.GetByCurrency(code));
         }
 
     }

@@ -11,7 +11,7 @@ namespace WebTestApp.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<TransactionEntity> builder)
         {
-            builder.ToTable("Transactions");
+            builder.ToTable("transactions");
 
             builder.HasKey(x => x.Id);
 

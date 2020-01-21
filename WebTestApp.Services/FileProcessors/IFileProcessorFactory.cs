@@ -7,6 +7,6 @@ namespace WebTestApp.Services.FileReaders
 {
     public interface IFileProcessorFactory
     {
-        IFileProcessor<T> GetFileReader<T>(FileReaderTypes type) where T : class;
+        IFileProcessor<T> GetFileReader<T>(string type) where T : class;
     }
 }
